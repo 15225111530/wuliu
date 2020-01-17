@@ -43,6 +43,8 @@ class Groupuser(models.Model):
 class ClientUser(models.Model):
     group = models.ForeignKey(Groupuser, on_delete=models.CASCADE)
     client_name = models.CharField(max_length=10,verbose_name='用户名称')
+    address = models.CharField(max_length=30,verbose_name='地址')
+    phone = models.CharField(max_length=30,verbose_name='电话')
     class Meta:
         db_table ='user_celinet'
         verbose_name ='客户模块角色表'
@@ -67,3 +69,12 @@ class SFunMsgs(models.Model):
         verbose_name = '导航栏表'
         verbose_name_plural = verbose_name
         unique_together = ('menu_code','menu_name','url','menu_level','father_code')
+
+
+# 订单管理
+
+class TheOrder(models.Model):
+    order_number = models.CharField(max_length=100,verbose_name='订单号')
+    data_times = models.CharField(max_length=100,verbose_name='订单时间')
+    consignor = models.CharField(max_length=30,verbose_name='发货人')
+    consignor_phone = models.CharField(max_length=30,verbose_name='发货人电话')

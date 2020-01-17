@@ -177,6 +177,8 @@ class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateMode
                     detail_dict['id']  = y.id
                     detail_dict['group_name']  = x.group_name
                     detail_dict['client_name']  = y.client_name
+                    detail_dict['address']  = y.address
+                    detail_dict['phone']  = y.phone
                     msgs.append(detail_dict)
         return Response({"code": 200, "msgs": msgs})
     def retrieve(self, request, *args, **kwargs):
@@ -184,20 +186,26 @@ class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateMode
         user = ClientUser.objects.filter(id=id).first()
         group_name = user.group.group_name
         group_id = user.group.id
-        return Response({'id': id, 'client_name': user.client_name, 'group_id': group_id,'group_name':group_name})
+        return Response({'id': id, 'client_name': user.client_name, 'group_id': group_id,'group_name':group_name,'address':user.address,'phone':user.phone})
 
     def create(self, request, *args, **kwargs):
         client_name = request.POST.get('client_name')
         group_id = request.POST.get('group_id')
-        ClientUser.objects.create(client_name=client_name,group_id=group_id)
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        ClientUser.objects.create(client_name=client_name,group_id=group_id,address=address,phone=phone)
         return Response({"code": 200, "msgs": '添加成功'})
     def update(self, request, *args, **kwargs):
         id = kwargs['pk']
         client_name = request.POST.get('client_name')
         group_id = request.POST.get('group_id')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
         user = ClientUser.objects.filter(id=id).first()
         user.client_name = client_name
         user.group_id = group_id
+        user.address = address
+        user.phone = phone
         user.save()
         return Response({"code": 200, "msgs": '修改成功'})
 
