@@ -160,7 +160,7 @@ class Group(viewsets.ModelViewSet):
 
 # 添加客户管理模块
 class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
-    authentication_classes = [MyAuthentication]
+    # authentication_classes = [MyAuthentication]
     queryset = Userinfo.objects.all()
     serializer_class = ClientSerializer
     pagination_class = PageViewSet
