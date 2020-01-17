@@ -12,11 +12,11 @@ from rest_framework_jwt.serializers import jwt_encode_handler
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
-from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer
+from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer
 from tools.newpage import PageViewSet
 
 # 导入model
-from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder
+from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder,TLogCost
 # Create your views here.
 
 
@@ -235,3 +235,9 @@ class Orders(viewsets.ModelViewSet):
 
     queryset = TheOrder.objects.all()
     serializer_class = OrderSerializer
+
+
+class Tlog(viewsets.ModelViewSet):
+
+    queryset = TLogCost.objects.all()
+    serializer_class = TLogCostSerializer

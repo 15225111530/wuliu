@@ -93,6 +93,8 @@ class TheOrder(models.Model):
     freight  = models.CharField(max_length=30,verbose_name='运费')
     rebates = models.CharField(max_length=30,verbose_name='返款')
     goods_note = models.CharField(max_length=30,verbose_name='货物备注')
+    the_party1 = models.CharField(max_length=30,verbose_name='运输方1')
+    the_party2 = models.CharField(max_length=30,verbose_name='运输方2')
 
 
     class Meta:
@@ -100,3 +102,18 @@ class TheOrder(models.Model):
         verbose_name = '订单模块'
         verbose_name_plural = verbose_name
         unique_together = ('order_number','data_times',)
+
+# 物流费用
+class TLogCost(models.Model):
+    provinces = models.CharField(max_length=30,verbose_name='省份')
+    city = models.CharField(max_length=30,verbose_name='城市')
+    county = models.CharField(max_length=30,verbose_name='县')
+    tounsty = models.CharField(max_length=30,verbose_name='乡')
+    money = models.CharField(max_length=30,verbose_name='费用')
+
+
+    class Meta:
+        db_table ='tlog'
+        verbose_name = '物流费用模块'
+        verbose_name_plural = verbose_name
+        unique_together = ('provinces','city','county','tounsty')
