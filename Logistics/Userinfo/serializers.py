@@ -51,12 +51,12 @@ class GroupuserSerializer(serializers.ModelSerializer):
 
 # 客户模块的序列化
 class ClientSerializer(serializers.ModelSerializer):
-    group_id = serializers.CharField(max_length='分组id')
-    client_name = serializers.CharField(max_length='用户昵称')
-
+    group_id = serializers.CharField(label='分组id')
+    client_name = serializers.CharField(label='用户昵称')
+    group_name = serializers.CharField(label='用户组',read_only=True)
     class Meta:
         model = ClientUser
-        fields = ('group_id','client_name')
+        fields = ('group_id','client_name','group_name')
 
 
 
