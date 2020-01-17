@@ -158,7 +158,7 @@ class Group(viewsets.ModelViewSet):
     queryset = Groupuser.objects.all()
     serializer_class = GroupuserSerializer
 
-
+# 添加客户管理模块
 class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
     authentication_classes = [MyAuthentication]
     queryset = Userinfo.objects.all()
@@ -179,11 +179,33 @@ class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateMode
                     detail_dict['client_name']  = y.client_name
                     msgs.append(detail_dict)
         return Response({"code": 200, "msgs": msgs})
+    def retrieve(self, request, *args, **kwargs):
+        id = kwargs['pk']
+        user = ClientUser.objects.filter(id=id).first()
+        group_name = user.group.group_name
+        group_id = user.group.id
+        return Response({'id': id, 'client_name': user.client_name, 'group_id': group_id,'group_name':group_name})
 
+    def create(self, request, *args, **kwargs):
+        client_name = request.POST.get('client_name')
+        group_id = request.POST.get('group_id')
+        ClientUser.objects.create(client_name=client_name,group_id=group_id)
+        return Response({"code": 200, "msgs": '添加成功'})
+    def update(self, request, *args, **kwargs):
+        id = kwargs['pk']
+        client_name = request.POST.get('client_name')
+        group_id = request.POST.get('group_id')
+        user = ClientUser.objects.filter(id=id).first()
+        user.client_name = client_name
+        user.group_id = group_id
+        user.save()
+        return Response({"code": 200, "msgs": '修改成功'})
 
-
-
-
+    def destroy(self, request, *args, **kwargs):
+        u_id = kwargs['pk']
+        uesr_query = ClientUser.objects.filter(id=u_id).first()
+        uesr_query.delete()
+        return Response({"code": 200, "msgs": '删除成'})
 class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
     queryset = SFunMsgs.objects.all()
     serializer_class = SFunSerializer
