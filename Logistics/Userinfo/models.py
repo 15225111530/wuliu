@@ -48,3 +48,22 @@ class ClientUser(models.Model):
         verbose_name ='客户模块角色表'
         verbose_name_plural = verbose_name
         unique_together = ('client_name', )
+
+
+
+
+# 菜单栏表
+class SFunMsgs(models.Model):
+    menu_code = models.CharField(max_length=10,verbose_name='菜单栏的code')
+    menu_name = models.CharField(max_length=30,verbose_name='菜单栏名称')
+    url = models.CharField(max_length=30,verbose_name='url路径')
+    menu_level = models.CharField(max_length=5,verbose_name='菜单栏的级别')
+    father_code = models.CharField(max_length=10,verbose_name='父级菜单栏id')
+    updated = models.DateTimeField(verbose_name='创建时间',default = timezone.now)
+    creat_at = models.DateTimeField(verbose_name='更新时间',auto_now=True)
+
+    class Meta:
+        db_table ='user_sfunmsgs'
+        verbose_name = '导航栏表'
+        verbose_name_plural = verbose_name
+        unique_together = ('menu_code','menu_name','url','menu_level','father_code')

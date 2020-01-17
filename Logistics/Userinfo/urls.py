@@ -13,6 +13,9 @@ router  = routers.DefaultRouter()
 router.register(r'login', views.Login,basename=u'用户登录')   #  用户登录获取token
 router.register(r'register', views.Register,basename=u'用户注册')   # 用户注册页面
 router.register(r'group', views.Group,basename=u'用户组')   #  用户组信息
+router.register(r'customer',views.Customer,basename='客户模块') # 客户信息
+router.register(r'sfunmsgs',views.SFunMsg,basename='导航栏')      # 升级日志
+
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,6 +1,6 @@
 from  rest_framework import  serializers
 from rest_framework_jwt.settings import api_settings
-from .models import Userinfo,Groupuser
+from .models import Userinfo,Groupuser,ClientUser,SFunMsgs
 import random
 import re
 
@@ -46,3 +46,21 @@ class GroupuserSerializer(serializers.ModelSerializer):
         model = Groupuser
         fields = "__all__"
 
+
+
+
+# 客户模块的序列化
+class ClientSerializer(serializers.ModelSerializer):
+    group_id = serializers.CharField(max_length='分组id')
+    client_name = serializers.CharField(max_length='用户昵称')
+
+    class Meta:
+        model = ClientUser
+        fields = ('group_id','client_name')
+
+
+
+class SFunSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SFunMsgs
+        fields = "__all__"

@@ -12,11 +12,11 @@ from rest_framework_jwt.serializers import jwt_encode_handler
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
-from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer
+from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer
 from tools.newpage import PageViewSet
 
 # 导入model
-from .models import  Userinfo,Groupuser
+from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs
 # Create your views here.
 
 
@@ -159,3 +159,43 @@ class Group(viewsets.ModelViewSet):
     serializer_class = GroupuserSerializer
 
 
+class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
+    authentication_classes = [MyAuthentication]
+    queryset = Userinfo.objects.all()
+    serializer_class = ClientSerializer
+    pagination_class = PageViewSet
+
+
+    def list(self, request, *args, **kwargs):
+        group_list = Groupuser.objects.all()
+        msgs = []
+        for x in group_list:
+            instance_status  =ClientUser.objects.filter(group_id=x.id)
+            if instance_status:
+                for y in instance_status:
+                    detail_dict = {}
+                    detail_dict['id']  = y.id
+                    detail_dict['group_name']  = x.group_name
+                    detail_dict['client_name']  = y.client_name
+                    msgs.append(detail_dict)
+        return Response({"code": 200, "msgs": msgs})
+
+
+
+
+
+class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
+    queryset = SFunMsgs.objects.all()
+    serializer_class = SFunSerializer
+
+    def list(self, request):
+        msgs = []
+        one_menu = SFunMsgs.objects.filter(menu_level =1)
+        for menu in one_menu:
+            dict = {}
+            dict['menu_name'] = menu.menu_name
+            two_menu = SFunMsgs.objects.filter(father_code=menu.menu_code,menu_level=2)
+            if two_menu:
+                dict['menu_two'] =SFunSerializer(instance=two_menu,many=True).data
+                msgs.append(dict)
+        return Response({"code": 200, "msgs": msgs})
