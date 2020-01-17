@@ -15,7 +15,7 @@ router.register(r'register', views.Register,basename=u'用户注册')   # 用户
 router.register(r'group', views.Group,basename=u'用户组')   #  用户组信息
 router.register(r'customer',views.Customer,basename='客户模块') # 客户信息
 router.register(r'sfunmsgs',views.SFunMsg,basename='导航栏')      # 升级日志
-
+router.register(r'theorder',views.Orders,basename='订单模块')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -12,11 +12,11 @@ from rest_framework_jwt.serializers import jwt_encode_handler
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
-from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer
+from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer
 from tools.newpage import PageViewSet
 
 # 导入model
-from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs
+from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder
 # Create your views here.
 
 
@@ -229,3 +229,9 @@ class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
                 dict['menu_two'] =SFunSerializer(instance=two_menu,many=True).data
                 msgs.append(dict)
         return Response({"code": 200, "msgs": msgs})
+
+# 订单模块的增删改查
+class Orders(viewsets.ModelViewSet):
+
+    queryset = TheOrder.objects.all()
+    serializer_class = OrderSerializer

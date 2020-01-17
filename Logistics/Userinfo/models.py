@@ -76,5 +76,27 @@ class SFunMsgs(models.Model):
 class TheOrder(models.Model):
     order_number = models.CharField(max_length=100,verbose_name='订单号')
     data_times = models.CharField(max_length=100,verbose_name='订单时间')
-    consignor = models.CharField(max_length=30,verbose_name='发货人')
-    consignor_phone = models.CharField(max_length=30,verbose_name='发货人电话')
+    post_user = models.CharField(max_length=30,verbose_name='发货人')
+    post_user_phone = models.CharField(max_length=30,verbose_name='发货人电话')
+    post_user_address = models.CharField(max_length=30,verbose_name='发货人地址')
+    get_user = models.CharField(max_length=30,verbose_name='收货人')
+    get_user_phone = models.CharField(max_length=30,verbose_name='收货人电话')
+    get_user_address= models.CharField(max_length=30,verbose_name='收货人地址')
+    note = models.CharField(max_length=30,verbose_name='订单备注')
+    status = models.CharField(max_length=30,verbose_name='订单状态')
+    com_name = models.CharField(max_length=30,verbose_name='货物名称')
+    com_number = models.CharField(max_length=30,verbose_name='货物数量')
+    com_weight = models.CharField(max_length=30,verbose_name='货物重量')
+    term_payment = models.CharField(max_length=30,verbose_name='付款方式')
+    take_way = models.CharField(max_length=30,verbose_name='取件方式')
+    single_price = models.CharField(max_length=30,verbose_name='单件')
+    freight  = models.CharField(max_length=30,verbose_name='运费')
+    rebates = models.CharField(max_length=30,verbose_name='返款')
+    goods_note = models.CharField(max_length=30,verbose_name='货物备注')
+
+
+    class Meta:
+        db_table ='the_order'
+        verbose_name = '订单模块'
+        verbose_name_plural = verbose_name
+        unique_together = ('order_number','data_times',)

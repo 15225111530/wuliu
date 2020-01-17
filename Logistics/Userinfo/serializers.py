@@ -1,6 +1,6 @@
 from  rest_framework import  serializers
 from rest_framework_jwt.settings import api_settings
-from .models import Userinfo,Groupuser,ClientUser,SFunMsgs
+from .models import Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder
 import random
 import re
 
@@ -65,4 +65,11 @@ class ClientSerializer(serializers.ModelSerializer):
 class SFunSerializer(serializers.ModelSerializer):
     class Meta:
         model = SFunMsgs
+        fields = "__all__"
+
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TheOrder
         fields = "__all__"
