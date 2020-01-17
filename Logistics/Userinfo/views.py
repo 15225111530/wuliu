@@ -6,15 +6,15 @@ from rest_framework.response import Response
 from rest_framework import mixins,generics
 from rest_framework_jwt.serializers import jwt_payload_handler
 from rest_framework_jwt.serializers import jwt_encode_handler
-
-
+from django_filters.rest_framework import  DjangoFilterBackend
+from rest_framework import filters
 
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
 from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer
 from tools.newpage import PageViewSet
-
+from .search import RegionFilter
 # 导入model
 from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder,TLogCost
 # Create your views here.
@@ -235,9 +235,11 @@ class Orders(viewsets.ModelViewSet):
 
     queryset = TheOrder.objects.all()
     serializer_class = OrderSerializer
-
-
+    filter_class = RegionFilter
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    pagination_class = PageViewSet
 class Tlog(viewsets.ModelViewSet):
 
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer
+    pagination_class = PageViewSet
