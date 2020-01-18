@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from .models import  TheOrder
+from .models import  TheOrder,TLogCost
 
 
 # # 查询
@@ -15,3 +15,13 @@ class RegionFilter(filters.FilterSet):
         model = TheOrder
         fields = ['post_user','get_user','the_party1','the_party2','data_times','order_number']
 
+class tlogfilter(filters.FilterSet):
+    provinces = filters.CharFilter(field_name='provinces', lookup_expr='icontains')
+    city = filters.CharFilter(field_name='city', lookup_expr='icontains')
+    county = filters.CharFilter(field_name='county', lookup_expr='icontains')
+    tounsty = filters.CharFilter(field_name='tounsty', lookup_expr='icontains')
+
+
+    class Meta:
+        model = TLogCost
+        fields = ['provinces','city','county','tounsty']
