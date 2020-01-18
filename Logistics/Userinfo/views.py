@@ -278,12 +278,12 @@ class  Search_region(viewsets.GenericViewSet,mixins.ListModelMixin):
 
 
     def list(self, request, *args, **kwargs):
-        provinces = request.GET.get('provinces')
-        city = request.GET.get('city')
-        county = request.GET.get('county')
-        tounsty = request.GET.get('tounsty')
+        provinces = request.GET.get('provinces','')
+        city = request.GET.get('city','')
+        county = request.GET.get('county','')
+        tounsty = request.GET.get('tounsty','')
 
-        if provinces==None and city==None and county==None and tounsty ==None:
+        if provinces=='' and city=='' and county=='' and tounsty =='':
             new_list = []
             provinces_list = TLogCost.objects.all()
             for x in provinces_list:
