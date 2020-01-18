@@ -17,6 +17,7 @@ router.register(r'customer',views.Customer,basename='客户模块') # 客户信�
 router.register(r'sfunmsgs',views.SFunMsg,basename='导航栏')      # 升级日志
 router.register(r'theorder',views.Orders,basename='订单模块')
 router.register(r'tlog',views.Tlog,basename='物流模块')
+router.register(r'personel',views.Searchuser,basename='人员筛选模块')
 
 urlpatterns = [
     path('', include(router.urls)),

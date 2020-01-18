@@ -238,8 +238,36 @@ class Orders(viewsets.ModelViewSet):
     filter_class = RegionFilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     pagination_class = PageViewSet
+
+
+# 物流模块
 class Tlog(viewsets.ModelViewSet):
 
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer
     pagination_class = PageViewSet
+
+
+
+# 订单模块人员
+class Searchuser(viewsets.GenericViewSet):
+    queryset = ClientUser.objects.all()
+    serializer_class = ClientSerializer
+
+    def list(self, request):
+        receiving = Groupuser.objects.filter(group_name__contains='收货').first().id
+        shipper = Groupuser.objects.filter(group_name__contains='发货').first().id
+        yunshu = Groupuser.objects.filter(group_name__contains='运输').first().id
+
+        receiving_list = ClientUser.objects.filter(group_id=receiving)
+        shipper_list = ClientUser.objects.filter(group_id=shipper)
+        yunshu_list = ClientUser.objects.filter(group_id=yunshu)
+
+
+        msgs = {
+            'shipper':ClientSerializer(instance=receiving_list,many=True).data,
+            'receiving':ClientSerializer(instance=shipper_list,many=True).data,
+            'transportation':ClientSerializer(instance=yunshu_list,many=True).data,
+        }
+        return Response({"code": 200, "msgs": msgs})
+
