@@ -272,3 +272,38 @@ class Searchuser(viewsets.GenericViewSet):
         }
         return Response({"code": 200, "msgs": msgs})
 
+class  Search_region(viewsets.GenericViewSet,mixins.ListModelMixin):
+    queryset = TLogCost.objects.all()
+    serializer_class = TLogCostSerializer
+
+
+    def list(self, request, *args, **kwargs):
+        provinces = request.GET.get('provinces')
+        city = request.GET.get('city')
+        county = request.GET.get('county')
+        tounsty = request.GET.get('tounsty')
+
+        if provinces==None and city==None and county==None and tounsty ==None:
+            new_list = []
+            provinces_list = TLogCost.objects.all()
+            for x in provinces_list:
+                new_list.append(x.provinces)
+            return Response({"code": 200, "msgs": set(new_list)})
+        if provinces:
+            new_list = []
+            provinces_list = TLogCost.objects.filter(provinces=provinces)
+            for x in provinces_list:
+                new_list.append(x.city)
+            return Response({"code": 200, "msgs": set(new_list)})
+        if city:
+            new_list = []
+            provinces_list = TLogCost.objects.filter(city=city)
+            for x in provinces_list:
+                new_list.append(x.county)
+            return Response({"code": 200, "msgs": set(new_list)})
+        if county:
+            new_list = []
+            provinces_list = TLogCost.objects.filter(county=county)
+            for x in provinces_list:
+                new_list.append(x.tounsty)
+            return Response({"code": 200, "msgs": set(new_list)})

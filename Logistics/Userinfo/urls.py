@@ -18,6 +18,7 @@ router.register(r'sfunmsgs',views.SFunMsg,basename='导航栏')      # 升级日
 router.register(r'theorder',views.Orders,basename='订单模块')
 router.register(r'tlog',views.Tlog,basename='物流模块')
 router.register(r'personel',views.Searchuser,basename='人员筛选模块')
+router.register(r'search_region',views.Search_region,basename='区域查询模块')
 
 urlpatterns = [
     path('', include(router.urls)),
