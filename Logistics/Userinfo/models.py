@@ -94,7 +94,11 @@ class TheOrder(models.Model):
     rebates = models.CharField(max_length=30,verbose_name='返款')
     goods_note = models.CharField(max_length=30,verbose_name='货物备注')
     the_party1 = models.CharField(max_length=30,verbose_name='运输方1')
+    the_party1_phone = models.CharField(max_length=30,verbose_name='运输方1电话')
+    the_party1_address= models.CharField(max_length=30,verbose_name='运输方1地址')
     the_party2 = models.CharField(max_length=30,verbose_name='运输方2')
+    the_party2_phone = models.CharField(max_length=30,verbose_name='运输方2电话')
+    the_party2_address= models.CharField(max_length=30,verbose_name='运输方2地址')
 
 
     class Meta:
