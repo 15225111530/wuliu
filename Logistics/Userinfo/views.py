@@ -219,16 +219,37 @@ class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
     serializer_class = SFunSerializer
 
     def list(self, request):
-        msgs = []
-        one_menu = SFunMsgs.objects.filter(menu_level =1)
-        for menu in one_menu:
-            dict = {}
-            dict['menu_name'] = menu.menu_name
-            two_menu = SFunMsgs.objects.filter(father_code=menu.menu_code,menu_level=2)
-            if two_menu:
-                dict['menu_two'] =SFunSerializer(instance=two_menu,many=True).data
-                msgs.append(dict)
-        return Response({"code": 200, "msgs": msgs})
+        token = request.META.get('HTTP_AUTHORIZATION', None)
+        token_obj = Userinfo.objects.filter(token=token).first()
+        if token_obj.is_superadmin == "1":
+            msgs = []
+            one_menu = SFunMsgs.objects.filter(menu_level =1)
+            for menu in one_menu:
+                dict = {}
+                dict['menu_name'] = menu.menu_name
+                two_menu = SFunMsgs.objects.filter(father_code=menu.menu_code,menu_level=2)
+                if two_menu:
+                    dict['menu_two'] =SFunSerializer(instance=two_menu,many=True).data
+                    msgs.append(dict)
+            return Response({"code": 200, "msgs": msgs})
+        else:
+            msgs = []
+            dict =  {
+            "menu_name": "订单系统",
+            "menu_two": [
+                {
+                    "id": 2,
+                    "menu_code": "M101",
+                    "menu_name": "个人订单",
+                    "url": "/user/personnel_order/",
+                    "menu_level": "2",
+                    "father_code": "M100",
+                },
+            ]
+        },
+            msgs.append(dict)
+            return Response({"code": 200, "msgs": dict})
+
 
 # 订单模块的增删改查
 class Orders(viewsets.ModelViewSet):
@@ -271,7 +292,7 @@ class Searchuser(viewsets.GenericViewSet):
             'transportation':ClientSerializer(instance=yunshu_list,many=True).data,
         }
         return Response({"code": 200, "msgs": msgs})
-
+# 区域信息查询，。去重
 class  Search_region(viewsets.GenericViewSet,mixins.ListModelMixin):
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer

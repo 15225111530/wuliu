@@ -87,12 +87,44 @@ class TheOrder(models.Model):
     com_name = models.CharField(max_length=30,verbose_name='货物名称')
     com_number = models.CharField(max_length=30,verbose_name='货物数量')
     com_weight = models.CharField(max_length=30,verbose_name='货物重量')
+    packaging = models.CharField(max_length=20,verbose_name='包装')
+    single_price = models.CharField(max_length=30, verbose_name='单价')
+    freight = models.CharField(max_length=30, verbose_name='运费')
+    rebates = models.CharField(max_length=30, verbose_name='返款')
+    transfer_fee = models.CharField(max_length=20,verbose_name='中转费')
+    goods_note = models.CharField(max_length=30, verbose_name='货物备注')
+
+
+    com_name1 = models.CharField(max_length=30,verbose_name='货物名称1')
+    com_number1 = models.CharField(max_length=30,verbose_name='货物数量1')
+    com_weight1 = models.CharField(max_length=30,verbose_name='货物重量1')
+    packaging1 = models.CharField(max_length=20,verbose_name='包装')
+    single_price1 = models.CharField(max_length=30, verbose_name='单价')
+    freight1 = models.CharField(max_length=30, verbose_name='运费')
+    rebates1 = models.CharField(max_length=30, verbose_name='返款')
+    transfer_fee1 = models.CharField(max_length=20,verbose_name='中转费')
+    goods_note1 = models.CharField(max_length=30, verbose_name='货物备注')
+
+    com_name2 = models.CharField(max_length=30,verbose_name='货物名称2')
+    com_number2 = models.CharField(max_length=30,verbose_name='货物数量2')
+    com_weight2 = models.CharField(max_length=30,verbose_name='货物重量2')
+    packaging2 = models.CharField(max_length=20,verbose_name='包装')
+    single_price2 = models.CharField(max_length=30, verbose_name='单价')
+    freight2 = models.CharField(max_length=30, verbose_name='运费')
+    rebates2 = models.CharField(max_length=30, verbose_name='返款')
+    transfer_fee2 = models.CharField(max_length=20,verbose_name='中转费')
+    goods_note2 = models.CharField(max_length=30, verbose_name='货物备注')
+
+
+
+
+
     term_payment = models.CharField(max_length=30,verbose_name='付款方式')
     take_way = models.CharField(max_length=30,verbose_name='取件方式')
-    single_price = models.CharField(max_length=30,verbose_name='单件')
-    freight  = models.CharField(max_length=30,verbose_name='运费')
-    rebates = models.CharField(max_length=30,verbose_name='返款')
-    goods_note = models.CharField(max_length=30,verbose_name='货物备注')
+
+
+    all_freight =models.CharField(max_length=30,verbose_name='总运费')
+
     the_party1 = models.CharField(max_length=30,verbose_name='运输方1')
     the_party1_phone = models.CharField(max_length=30,verbose_name='运输方1电话')
     the_party1_address= models.CharField(max_length=30,verbose_name='运输方1地址')
