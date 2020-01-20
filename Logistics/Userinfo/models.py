@@ -99,7 +99,7 @@ class TheOrder(models.Model):
     the_party2 = models.CharField(max_length=30,verbose_name='运输方2')
     the_party2_phone = models.CharField(max_length=30,verbose_name='运输方2电话')
     the_party2_address= models.CharField(max_length=30,verbose_name='运输方2地址')
-
+    type = models.CharField(max_length=30,verbose_name='货物类型')
 
     class Meta:
         db_table ='the_order'

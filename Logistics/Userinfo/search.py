@@ -10,10 +10,11 @@ class RegionFilter(filters.FilterSet):
     the_party2 = filters.CharFilter(field_name='the_party2',lookup_expr='icontains')
     data_times = filters.CharFilter(field_name='data_times',lookup_expr='icontains')
     order_number = filters.CharFilter(field_name='order_number',lookup_expr='icontains')
+    type = filters.CharFilter(field_name='type',lookup_expr='icontains')
 
     class Meta:
         model = TheOrder
-        fields = ['post_user','get_user','the_party1','the_party2','data_times','order_number']
+        fields = ['post_user','get_user','the_party1','the_party2','data_times','order_number','type']
 
 class tlogfilter(filters.FilterSet):
     provinces = filters.CharFilter(field_name='provinces', lookup_expr='icontains')
