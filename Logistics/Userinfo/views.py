@@ -393,7 +393,7 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
             df = pd.DataFrame({'省份': array1, '城市': array2, '县': array3, '乡': array4, '费用': array5})
             df.to_excel('static/wuliu.xlsx')
             return Response({'code': 200, 'msgs': 'static/wuliu.xlsx'})
-
+# 查询人员信息
 class Search_User(viewsets.ModelViewSet):
     queryset = ClientUser.objects.all()
     serializer_class = ClientSerializer
@@ -401,7 +401,7 @@ class Search_User(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
 
 
-
+# 更新订单状态
 class Update_Order(viewsets.GenericViewSet,mixins.CreateModelMixin):
     queryset = TheOrder.objects.all()
     serializer_class = UpdaorderSerializer
