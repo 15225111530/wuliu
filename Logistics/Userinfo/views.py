@@ -336,14 +336,63 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
 
 
     def list(self, request, *args, **kwargs):
+        array1 = []
+        array2 = []
+        array3 = []
+        array4 = []
+        array5 = []
+        array6 = []
         type = request.GET.get('type')
         if type == 'seafoodTheorder':
-            pass
-        if type == 'foodTheorder':
-            pass
-        if type =='all':
-            pass
+            datas = TheOrder.objects.filter(type='其他')
+            if datas:
+                for data in datas:
+                    array1.append(data.order_number)
+                    array2.append(data.data_times)
+                    array3.append(data.post_user)
+                    array4.append(data.get_user)
+                    array5.append(data.all_freight)
+                    array6.append(data.type)
+            df = pd.DataFrame({'订单号':array1,'时间':array2,'发货人':array3,'收货人':array4,'总金额':array5,'类型':array6})
+            df.to_excel('static/seafoodTheorder.xlsx')
+            return Response({'code':200,'msgs':'static/seafoodTheorder.xlsx'})
 
+        if type == 'foodTheorder':
+            datas = TheOrder.objects.filter(type='石材')
+            if datas:
+                for data in datas:
+                    array1.append(data.order_number)
+                    array2.append(data.data_times)
+                    array3.append(data.post_user)
+                    array4.append(data.get_user)
+                    array5.append(data.all_freight)
+                    array6.append(data.type)
+            df = pd.DataFrame({'订单号': array1, '时间': array2, '发货人': array3, '收货人': array4, '总金额': array5, '类型': array6})
+            df.to_excel('static/foodTheorder.xlsx')
+            return Response({'code': 200, 'msgs': 'static/foodTheorder.xlsx'})
+        if type =='all':
+            return Response({'code': 200, 'msgs': '暂无功能'})
+        if type =='user':
+            datas = Userinfo.objects.all()
+            if datas:
+                for data in datas:
+                    array1.append(data.username)
+                    array2.append('是' if data.is_superadmin=='1' else '不是')
+            df = pd.DataFrame({'用户名称': array1, '是否是管理员': array2})
+            df.to_excel('static/user.xlsx')
+            return Response({'code': 200, 'msgs': 'static/user.xlsx'})
+        if type == '物流':
+            datas = TLogCost.objects.all()
+            if datas:
+                for data in datas:
+                    array1.append(data.provinces)
+                    array2.append(data.city)
+                    array3.append(data.county)
+                    array4.append(data.tounsty)
+                    array5.append(data.money)
+            df = pd.DataFrame({'省份': array1, '城市': array2, '县': array3, '乡': array4, '费用': array5})
+            df.to_excel('static/wuliu.xlsx')
+            return Response({'code': 200, 'msgs': 'static/wuliu.xlsx'})
 
 class Search_User(viewsets.ModelViewSet):
     queryset = ClientUser.objects.all()
