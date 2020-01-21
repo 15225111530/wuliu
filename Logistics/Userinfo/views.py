@@ -393,6 +393,10 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
             df = pd.DataFrame({'省份': array1, '城市': array2, '县': array3, '乡': array4, '费用': array5})
             df.to_excel('static/wuliu.xlsx')
             return Response({'code': 200, 'msgs': 'static/wuliu.xlsx'})
+
+
+        else:
+            return Response({'code': 200, 'msgs': '暂无功能'})
 # 查询人员信息
 class Search_User(viewsets.ModelViewSet):
     queryset = ClientUser.objects.all()
