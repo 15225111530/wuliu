@@ -240,8 +240,16 @@ class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
                 {
                     "id": 2,
                     "menu_code": "M101",
-                    "menu_name": "个人订单",
-                    "url": "/user/personnel_order/",
+                    "menu_name": "个人发货订单",
+                    "url": "/user/post_order/",
+                    "menu_level": "2",
+                    "father_code": "M100",
+                },
+                {
+                    "id": 2,
+                    "menu_code": "M102",
+                    "menu_name": "个人收获订单",
+                    "url": "/user/get_order/",
                     "menu_level": "2",
                     "father_code": "M100",
                 },
