@@ -12,7 +12,7 @@ import pandas as pd
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
-from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer
+from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer,UpdaorderSerializer
 from tools.newpage import PageViewSet
 from .search import RegionFilter,tlogfilter,Search_user
 # 导入model
@@ -355,7 +355,7 @@ class Search_User(viewsets.ModelViewSet):
 
 class Update_Order(viewsets.GenericViewSet,mixins.CreateModelMixin):
     queryset = TheOrder.objects.all()
-    serializer_class = OrderSerializer
+    serializer_class = UpdaorderSerializer
 
 
     def create(self, request, *args, **kwargs):

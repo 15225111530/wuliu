@@ -81,3 +81,12 @@ class TLogCostSerializer(serializers.ModelSerializer):
     class Meta:
         model = TLogCost
         fields = "__all__"
+
+
+class UpdaorderSerializer(serializers.ModelSerializer):
+
+    id = serializers.CharField(label='id')
+    status  = serializers.CharField(label='status')
+    class Meta:
+        model = TheOrder
+        fields = ('id','status')
