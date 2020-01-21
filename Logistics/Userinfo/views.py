@@ -8,7 +8,7 @@ from rest_framework_jwt.serializers import jwt_payload_handler
 from rest_framework_jwt.serializers import jwt_encode_handler
 from django_filters.rest_framework import  DjangoFilterBackend
 from rest_framework import filters
-
+import pandas as pd
 # 导入自定义封装的方法
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
@@ -334,10 +334,12 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer
 
-    #
+
     # def list(self, request, *args, **kwargs):
     #     type = request.GET.get('type')
-    #     pa
+    #     if type == 'goods':
+    #         pd.read_sql_query()
+
 
 class Search_User(viewsets.ModelViewSet):
     queryset = ClientUser.objects.all()
