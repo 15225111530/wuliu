@@ -19,6 +19,10 @@ router.register(r'theorder',views.Orders,basename='订单模块')
 router.register(r'tlog',views.Tlog,basename='物流模块')
 router.register(r'personel',views.Searchuser,basename='人员筛选模块')
 router.register(r'search_region',views.Search_region,basename='区域查询模块')
+router.register(r'excel',views.Excel,basename='导出excel')
+router.register(r'search_user',views.Search_User,basename='模糊查询收货人信息')
+
+
 
 urlpatterns = [
     path('', include(router.urls)),

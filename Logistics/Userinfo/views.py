@@ -14,7 +14,7 @@ from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
 from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer
 from tools.newpage import PageViewSet
-from .search import RegionFilter,tlogfilter
+from .search import RegionFilter,tlogfilter,Search_user
 # 导入model
 from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder,TLogCost
 # Create your views here.
@@ -328,3 +328,19 @@ class  Search_region(viewsets.GenericViewSet,mixins.ListModelMixin):
             for x in provinces_list:
                 new_list.append(x.tounsty)
             return Response({"code": 200, "msgs": set(new_list)})
+
+# 导出excel
+class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
+    queryset = TLogCost.objects.all()
+    serializer_class = TLogCostSerializer
+
+    #
+    # def list(self, request, *args, **kwargs):
+    #     type = request.GET.get('type')
+    #     pa
+
+class Search_User(viewsets.ModelViewSet):
+    queryset = ClientUser.objects.all()
+    serializer_class = ClientSerializer
+    filter_class = Search_user
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)

@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from .models import  TheOrder,TLogCost
+from .models import  TheOrder,TLogCost,ClientUser
 
 
 # # 查询
@@ -26,3 +26,13 @@ class tlogfilter(filters.FilterSet):
     class Meta:
         model = TLogCost
         fields = ['provinces','city','county','tounsty']
+
+
+class Search_user(filters.FilterSet):
+    client_name = filters.CharFilter(field_name='client_name', lookup_expr='icontains')
+
+
+    class Meta:
+        model = ClientUser
+        fields = ['client_name','group_id']
+
