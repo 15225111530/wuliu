@@ -21,6 +21,7 @@ router.register(r'personel',views.Searchuser,basename='人员筛选模块')
 router.register(r'search_region',views.Search_region,basename='区域查询模块')
 router.register(r'excel',views.Excel,basename='导出excel')
 router.register(r'search_user',views.Search_User,basename='模糊查询收货人信息')
+router.register(r'update_order',views.Update_Order,basename='查询订单状态')
 
 
 

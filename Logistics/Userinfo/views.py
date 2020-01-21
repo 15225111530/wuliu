@@ -335,10 +335,14 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
     serializer_class = TLogCostSerializer
 
 
-    # def list(self, request, *args, **kwargs):
-    #     type = request.GET.get('type')
-    #     if type == 'goods':
-    #         pd.read_sql_query()
+    def list(self, request, *args, **kwargs):
+        type = request.GET.get('type')
+        if type == 'seafoodTheorder':
+            pass
+        if type == 'foodTheorder':
+            pass
+        if type =='all':
+            pass
 
 
 class Search_User(viewsets.ModelViewSet):
@@ -346,3 +350,19 @@ class Search_User(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     filter_class = Search_user
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+
+
+
+class Update_Order(viewsets.GenericViewSet,mixins.CreateModelMixin):
+    queryset = TheOrder.objects.all()
+    serializer_class = OrderSerializer
+
+
+    def create(self, request, *args, **kwargs):
+        id = request.POST.get('id')
+        status = request.POST.get('status')
+
+        order = TheOrder.objects.filter(id=id).first()
+        order.status = status
+        order.save()
+        return Response({"code": 200, "msgs": '修改成功'})
