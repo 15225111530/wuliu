@@ -10,7 +10,7 @@ class RegionFilter(filters.FilterSet):
     the_party2 = filters.CharFilter(field_name='the_party2',lookup_expr='icontains')
     data_times = filters.CharFilter(field_name='data_times',lookup_expr='icontains')
     # order_number = filters.CharFilter(field_name='order_number',lookup_expr='icontains')
-    # type = filters.CharFilter(field_name='type',lookup_expr='icontains')
+    type = filters.CharFilter(field_name='type',lookup_expr='icontains')
 
     class Meta:
         model = TheOrder
