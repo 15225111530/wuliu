@@ -14,7 +14,7 @@ class RegionFilter(filters.FilterSet):
 
     class Meta:
         model = TheOrder
-        fields = ['post_user','get_user','the_party1','the_party2','data_times','order_number','type','status']
+        fields = ['type','post_user','get_user','the_party1','the_party2','data_times','order_number','status']
 
 class tlogfilter(filters.FilterSet):
     provinces = filters.CharFilter(field_name='provinces', lookup_expr='icontains')
