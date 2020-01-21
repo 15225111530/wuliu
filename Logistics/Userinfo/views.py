@@ -52,7 +52,7 @@ class Login(viewsets.ModelViewSet,mixins.CreateModelMixin):
                         uesr_query.token = token
                         uesr_query.ip = ip
                         uesr_query.save()
-                        return Response({"code":200,"token":token,'username':uesr_query.username})
+                        return Response({"code":200,"token":token,'username':uesr_query.username,'is_superadmin':uesr_query.is_superadmin})
                     return  Response({"code":400,"msgs":'账户密码不对，请检查输入信息'})
                 else:
                     return  Response({"code":400,"msgs":'账户已被禁用，请联系管理员进行启用'})
