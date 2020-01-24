@@ -285,8 +285,8 @@ class Searchuser(viewsets.GenericViewSet):
     serializer_class = ClientSerializer
 
     def list(self, request):
-        receiving = Groupuser.objects.filter(group_name__contains='发货').first().id
-        shipper = Groupuser.objects.filter(group_name__contains='收货').first().id
+        receiving = Groupuser.objects.filter(group_name__contains='收货').first().id
+        shipper = Groupuser.objects.filter(group_name__contains='发货').first().id
         yunshu = Groupuser.objects.filter(group_name__contains='运输').first().id
 
         receiving_list = ClientUser.objects.filter(group_id=receiving)
