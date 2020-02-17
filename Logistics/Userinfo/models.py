@@ -146,6 +146,7 @@ class TLogCost(models.Model):
     county = models.CharField(max_length=30,verbose_name='县')
     tounsty = models.CharField(max_length=30,verbose_name='乡')
     money = models.CharField(max_length=30,verbose_name='费用')
+    address = models.CharField(max_length=30,verbose_name='地址')
 
 
     class Meta:
