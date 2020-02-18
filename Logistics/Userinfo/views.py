@@ -399,7 +399,7 @@ class Excel(viewsets.GenericViewSet,mixins.ListModelMixin):
                     array4.append(data.tounsty)
                     array5.append(data.money)
                     array6.append(data.address)
-            df = pd.DataFrame({'省份': array1, '城市': array2, '联系人': array3, '电话': array4, '地址': array6,'费用': array5})
+            df = pd.DataFrame({'区域': array1, '类型': array2, '联系人': array3, '电话': array4, '地址': array6,'费用': array5})
             df.to_excel('static/wuliu.xlsx')
             return Response({'code': 200, 'msgs': 'static/wuliu.xlsx'})
 
