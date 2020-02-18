@@ -271,7 +271,7 @@ class Orders(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     pagination_class = PageViewSet
     authentication_classes = [MyAuthentication]
-    permission_classes = [MyPermission]
+    # permission_classes = [MyPermission]
 
 # 物流模块
 class Tlog(viewsets.ModelViewSet):
