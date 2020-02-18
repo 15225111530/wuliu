@@ -64,8 +64,8 @@ class Register(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateMode
     queryset = Userinfo.objects.all()
     serializer_class = RegisterSerializer
     pagination_class = PageViewSet
-
-    # permission_classes = [MyPermission]
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
     # 重写list方法，显示首页的人员信息
     def list(self, request):
         msgs = []
@@ -157,14 +157,16 @@ class Group(viewsets.ModelViewSet):
     '''
     queryset = Groupuser.objects.all()
     serializer_class = GroupuserSerializer
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 # 添加客户管理模块
 class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
     # authentication_classes = [MyAuthentication]
     queryset = Userinfo.objects.all()
     serializer_class = ClientSerializer
     pagination_class = PageViewSet
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
     def list(self, request, *args, **kwargs):
         group_list = Groupuser.objects.all()
@@ -217,7 +219,8 @@ class Customer(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.UpdateMode
 class SFunMsg(viewsets.ModelViewSet,mixins.UpdateModelMixin,ListAPIView):
     queryset = SFunMsgs.objects.all()
     serializer_class = SFunSerializer
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
     def list(self, request):
         token = request.META.get('HTTP_AUTHORIZATION', None)
         token_obj = Userinfo.objects.filter(token=token).first()
@@ -267,7 +270,8 @@ class Orders(viewsets.ModelViewSet):
     filter_class = RegionFilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     pagination_class = PageViewSet
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
 # 物流模块
 class Tlog(viewsets.ModelViewSet):
@@ -277,13 +281,15 @@ class Tlog(viewsets.ModelViewSet):
     pagination_class = PageViewSet
     filter_class = tlogfilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
 # 订单模块人员
 class Searchuser(viewsets.GenericViewSet):
     queryset = ClientUser.objects.all()
     serializer_class = ClientSerializer
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
     def list(self, request):
         receiving = Groupuser.objects.filter(group_name__contains='收货').first().id
         shipper = Groupuser.objects.filter(group_name__contains='发货').first().id
@@ -304,7 +310,8 @@ class Searchuser(viewsets.GenericViewSet):
 class  Search_region(viewsets.GenericViewSet,mixins.ListModelMixin):
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
     def list(self, request, *args, **kwargs):
         provinces = request.GET.get('provinces','')
@@ -412,13 +419,15 @@ class Search_User(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     filter_class = Search_user
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
 # 更新订单状态
 class Update_Order(viewsets.GenericViewSet,mixins.CreateModelMixin):
     queryset = TheOrder.objects.all()
     serializer_class = UpdaorderSerializer
-
+    authentication_classes = [MyAuthentication]
+    permission_classes = [MyPermission]
 
     def create(self, request, *args, **kwargs):
         id = request.POST.get('id')
