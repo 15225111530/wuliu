@@ -272,7 +272,7 @@ class Orders(viewsets.ModelViewSet):
     pagination_class = PageViewSet
     # authentication_classes = [MyAuthentication]
     # permission_classes = [MyPermission]
-
+    authentication_classes = [MyAuthentication,list]
 # 物流模块
 class Tlog(viewsets.ModelViewSet):
 
