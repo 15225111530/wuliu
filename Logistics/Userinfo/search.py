@@ -18,7 +18,7 @@ class RegionFilter(filters.FilterSet):
 
 class tlogfilter(filters.FilterSet):
     provinces = filters.CharFilter(field_name='provinces', lookup_expr='icontains')
-    # city = filters.CharFilter(field_name='city', lookup_expr='icontains')
+    city = filters.CharFilter(field_name='city', lookup_expr='icontains')
     county = filters.CharFilter(field_name='county', lookup_expr='icontains')
     tounsty = filters.CharFilter(field_name='tounsty', lookup_expr='icontains')
 

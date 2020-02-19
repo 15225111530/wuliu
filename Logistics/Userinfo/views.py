@@ -270,7 +270,7 @@ class Orders(viewsets.ModelViewSet):
     filter_class = RegionFilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     pagination_class = PageViewSet
-    authentication_classes = [MyAuthentication]
+    # authentication_classes = [MyAuthentication]
     # permission_classes = [MyPermission]
 
 # 物流模块
