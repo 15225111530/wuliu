@@ -281,8 +281,8 @@ class Tlog(viewsets.ModelViewSet):
     pagination_class = PageViewSet
     filter_class = tlogfilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    authentication_classes = [MyAuthentication]
-    permission_classes = [MyPermission]
+    # authentication_classes = [MyAuthentication]
+    # permission_classes = [MyPermission]
 
 # 订单模块人员
 class Searchuser(viewsets.GenericViewSet):
