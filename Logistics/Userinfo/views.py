@@ -13,7 +13,7 @@ import pandas as pd
 from .utils import MyPermission,MyAuthentication
 from tools.get_ip import client_ip
 from .serializers import CreateUserSerializer,RegisterSerializer,GroupuserSerializer,ClientSerializer,SFunSerializer,OrderSerializer,TLogCostSerializer,UpdaorderSerializer
-from tools.newpage import PageViewSet
+from tools.newpage import PageViewSet,TlogPageViewSet
 from .search import RegionFilter,tlogfilter,Search_user
 # 导入model
 from .models import  Userinfo,Groupuser,ClientUser,SFunMsgs,TheOrder,TLogCost
@@ -278,7 +278,7 @@ class Tlog(viewsets.ModelViewSet):
 
     queryset = TLogCost.objects.all()
     serializer_class = TLogCostSerializer
-    pagination_class = PageViewSet
+    pagination_class = TlogPageViewSet
     filter_class = tlogfilter
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     # authentication_classes = [MyAuthentication]

@@ -5,3 +5,12 @@ class PageViewSet(PageNumberPagination):
     max_page_size = 10
     page_query_param = 'p'
     page_size_query_param = 'page_size'
+
+
+
+
+class TlogPageViewSet(PageNumberPagination):
+    page_size = 3000
+    max_page_size = 3000
+    page_query_param = 'p'
+    page_size_query_param = 'page_size'
